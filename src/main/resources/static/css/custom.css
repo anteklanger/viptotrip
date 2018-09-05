@@ -1,3 +1,22 @@
-table, th, td {
-    border: 3px;
+tr {
+    background-color: gainsboro;
+}
+
+input {
+    background-color: whitesmoke;
+    border: none;
+}
+
+td {
+    padding: 6px;
+    padding-right: 15px
+}
+
+div {
+    background-color: darkgrey
+}
+
+textarea {
+    background-color: whitesmoke;
+    border: none;
 }

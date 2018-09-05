@@ -13,7 +13,7 @@
 </head>
 <body>
 
-Lista przelotów:<br/>
+Lista gości:<br/>
 <ol>
     <c:forEach items="${guests}" var="guest">
         <li>${guest.username} ${guest.pin}</li>

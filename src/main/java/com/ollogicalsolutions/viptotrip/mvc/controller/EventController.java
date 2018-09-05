@@ -113,6 +113,7 @@ public class EventController {
         guestsCreator.createListOfGuestsForEvent(eventCode, list);
         List<User> users = userRepository.findAllByEvent_Code(eventCode);
         model.addAttribute("guests", users);
+        model.addAttribute("event", eventRepository.findFirstByCode(eventCode));
         return "guestssucces";
     }
 

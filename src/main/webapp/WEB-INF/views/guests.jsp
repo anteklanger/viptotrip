@@ -10,27 +10,65 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        tr {
+            background-color: gainsboro;
+        }
+
+        input {
+            background-color: whitesmoke;
+            border: none;
+        }
+
+        td {
+            padding: 6px;
+            padding-right: 15px
+        }
+
+        div {
+            background-color: darkgrey;
+            font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif
+        }
+
+        textarea {
+            background-color: whitesmoke;
+            border: none;
+        }
+
+        body {
+            background-color: darkgrey;
+        }
+    </style>
 </head>
 <body>
 
-DOADAJ LISTĘ ZAPROSZONYCH GOŚCI
+<div align="center">
+    <fieldset>
+        <legend>Panel administracyjny - lista gości - dane podstawowe</legend>
+        <br>
+        <table style="border-collapse: separate; border-spacing: 10px;">
 
-w formacie "Imię Nazwisko," <br>
-każdy gość w osobnej linii. Każada linia zkończona "," <br>
+            <form action="/event/add_guests/${eventCode}" method="post">
 
-przykład: <br>
-<br>
+                Dodaj listę gości w formacie "Imię Nazwisko,". <br>
+                Każdy gość w osobnej linii. Każada linia zkończona "," <br><br>
+                <div style="background-color: whitesmoke; width: 500px">
+                    przykład: <br>
+                    <br>
+                    Jan Kowalski, <br>
+                    Piotr Nowak, <br>
+                    Ewa Górska, <br>
+                </div>
 
-Jan Kowalski, <br>
-Piotr Nowak, <br>
-Ewa Górska, <br>
+                <label><h2>LISTA</h2>
+                    <textarea name="list" cols="50" rows="20"></textarea><br><br>
+                    <input type="submit" name="message" placeholder="message">
 
-<form action="/event/add_guests/${eventCode}" method="post">
-    <label><h2>LISTA</h2>
-        <textarea name="list" cols="50" rows="20"></textarea><br>
-        <input type="submit" name="message" placeholder="message">
+                </label>
 
-    </label>
-</form>
+            </form>
+        </table>
+    </fieldset>
+</div>
 </body>
 </html>

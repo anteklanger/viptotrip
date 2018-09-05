@@ -100,6 +100,15 @@ public class EventController {
         return ("agendasuccess");
     }
 
+    @GetMapping("delete_agenda/{eventCode}/{id}")
+    public String agendaDeleteEntry(@PathVariable String id, @PathVariable String eventCode, Model model) {
+        agendaEntryRepository.delete( agendaEntryRepository.getOne(Long.parseLong(id)));
+        List<AgendaEntry> agendaEntries = agendaEntryRepository.findAllByEvent_CodeOrderByEntryPosition(eventCode);
+        model.addAttribute("agenda", agendaEntries);
+        model.addAttribute("eventCode", eventCode);
+        return ("agendasuccess");
+    }
+
     @GetMapping("add_guests/{eventCode}")
     public String addGuests(@PathVariable String eventCode, Model model) {
         String guests = null;

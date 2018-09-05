@@ -7,22 +7,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ include file="head.jsp" %>
 
-Agenda:<br/>
-<ol>
-    <c:forEach items="${agenda}" var="agenda">
-        <li>${agenda.entryPosition} ${agenda.startHour} ${agenda.endHour} ${agenda.entryDescription}</li>
-    </c:forEach>
-    <br>
-</ol>
+<div align="center">
 
-<a href="/event/add_agenda/${eventCode}">DODAJ KOLEJNĄ POZYCJĘ AGENDY</a><br>
-<a href="/event/add_guests/${eventCode}">DODAJ LISTĘ GOŚCI</a>
+    <fieldset>
+        <legend>Panel administracyjny - agenda - dane podstawowe</legend>
+        <h2>Agenda:</h2><br/>
 
-</body>
-</html>
+        <div align="center">
+            <table>
+                <c:forEach items="${agenda}" var="agenda">
+                    <tr>
+                        <td>${agenda.entryPosition}</td>
+                        <td>${agenda.startHour}</td>
+                        <td>${agenda.endHour}</td>
+                        <td>${agenda.entryDescription}</td>
+                        <td>${agenda.entryCategory}</td>
+                        <td><a href="/event/delete_agenda/${agenda.event.code}/${agenda.id}">USUN</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <br>
+
+        <section class="jubotron" style="background-color: lightgray;">
+            <a href="/event/add_agenda/${eventCode}" class="agenda-success-btn">DODAJ KOLEJNĄ POZYCJĘ AGENDY</a>
+            <a href="/event/add_guests/${eventCode}" class="agenda-success-btn">DODAJ LISTĘ GOŚCI</a>
+        </section>
+    </fieldset>
+</div>

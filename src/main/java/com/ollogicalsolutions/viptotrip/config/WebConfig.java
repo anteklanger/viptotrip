@@ -15,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.ollogicalsolutions")
-@EnableWebMvc
+
 @EnableJpaRepositories(basePackages = "com.ollogicalsolutions")
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {

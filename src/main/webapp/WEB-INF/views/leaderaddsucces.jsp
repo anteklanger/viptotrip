@@ -7,25 +7,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ include file="head.jsp" %>
 
-Users:<br/>
-<ol>
-    <c:forEach items="${leaders}" var="lider">
-        <li>${lider.name}</li>
-    </c:forEach>
 
+<div align="center">
+    <h2>Opiekunowie:</h2><br/>
+
+    <table>
+        <c:forEach items="${leaders}" var="lider">
+            <tr>
+                <td>${lider.name}</td>
+                <td>${lider.phone}</td>
+            </tr>
+        </c:forEach>
+    </table>
     <br>
-
-    <a href="/event/add_leaders/${eventCode}">DODAJ KOLEJNEGO OPIEKUNA</a>
-
-    <a href="/event/add_flight/${eventCode}">DODAJ INFORMACJE O PRZELOTACH</a>
-
-</ol>
-
+    <section class="jubotron" style="background-color: lightgray;">
+        <a href="/event/add_leaders/${eventCode}" class="agenda-success-btn">DODAJ KOLEJNEGO OPIEKUNA</a>
+        <a href="/index" class="agenda-success-btn">ZATWIERDZ I WRÓC DO MENU GLOWNEGO</a>
+    </section>
+</div>
 </body>
 </html>

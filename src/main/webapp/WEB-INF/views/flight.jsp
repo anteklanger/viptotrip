@@ -1,55 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
-<head>
-    <title>Przeloty</title>
-    <link href="/css/custom.css" rel="stylesheet">
-    <style>
-        tr {
-            background-color: gainsboro;
-        }
-
-        input {
-            background-color: whitesmoke;
-            border: none;
-        }
-
-        td {
-            padding: 6px;
-            padding-right: 15px
-        }
-
-        div {
-            background-color: darkgrey;
-            font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif
-        }
-
-        textarea {
-            background-color: whitesmoke;
-            border: none;
-        }
-
-        body {
-            background-color: darkgrey;
-        }
-    </style>
-</head>
-<body>
-
-<%--<form:form method="post" modelAttribute="flight">--%>
-
-<%--KOD LOTU: <br/>--%>
-<%--WYLOT Z LOTNISKA (miasto): <br/>--%>
-<%--DATA WYLOTU: <br/>--%>
-<%--GODZINA WYLOTU: <br/>--%>
-<%--PRZYLOT DO (miasto): <br/>--%>
-<%--DATA PRZYLOTU: <br/>--%>
-<%--PRZYLOT O GODZINIE: <br/>--%>
-<%--<input type="submit" value="Zatwierdź"/>--%>
-<%--</form:form>--%>
-
+<%@ include file="head.jsp" %>
 
 <div align="center">
     <fieldset>
@@ -63,11 +15,11 @@
                     <td style="font-size: small; background-color: darkgrey" align="center"></td>
                 </tr>
                 <tr>
-                    <td colspan="1" align="right">WYLOT: <form:radiobutton path="flightType" value="OUT"
+                    <td colspan="1" align="right">WYLOT:<form:radiobutton path="flightType" value="OUT"
                                                                            checked="true"/></td>
                 </tr>
                 <tr>
-                    <td colspan="1" align="right">POWRÓT: POWRÓT: <form:radiobutton path="flightType"
+                    <td colspan="1" align="right">POWRÓT:<form:radiobutton path="flightType"
                                                                                     value="BACK"/></td>
                 </tr>
 

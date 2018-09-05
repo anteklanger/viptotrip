@@ -7,40 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <style>
-        tr {
-            background-color: gainsboro;
-        }
-
-        input {
-            background-color: whitesmoke;
-            border: none;
-        }
-
-        td {
-            padding: 6px;
-            padding-right: 15px
-        }
-
-        div {
-            background-color: darkgrey;
-            font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif
-        }
-
-        textarea {
-            background-color: whitesmoke;
-            border: none;
-        }
-
-        body {
-            background-color: darkgrey;
-        }
-    </style>
-</head>
-<body>
+<%@ include file="head.jsp" %>
 
 <div align="center">
     <fieldset>

@@ -7,24 +7,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ include file="head.jsp" %>
 
-Lista gości:<br/>
-<ol>
-    <c:forEach items="${guests}" var="guest">
-        <li>${guest.username} ${guest.pin}</li>
-    </c:forEach>
+<div align="center">
 
+    <h2>Lista gości:</h2><br/>
+    <table>
+        <c:forEach items="${guests}" var="guest">
+            <tr>
+                <td>${guest.username}</td>
+                <td>${guest.pin}</td>
+            </tr>
+        </c:forEach>
+    </table>
     <br>
-
-    <a href="/event/add_leaders/${event.code}">DODAJ OPIEKUNA GRUPY DO EVENTU O KODZIE ${event.code}</a>
-
-
-</ol>
+    <section class="jubotron" style="background-color: lightgray;">
+        <a href="/event/add_leaders/${event.code}" class="agenda-success-btn">DODAJ OPIEKUNA GRUPY DO EVENTU</a>
+    </section>
+</div>
 
 </body>
 </html>

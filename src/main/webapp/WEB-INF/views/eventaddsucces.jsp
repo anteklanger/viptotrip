@@ -7,22 +7,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>eventaddsucces</title>
-</head>
-<body>
+<%@ include file="head.jsp" %>
+<div align="center">
 
-DODANY EVENT<br>
-
-${event.code} <br>
-${event.eventName}<br>
-${event.eventCategory}<br>
-
-<c:if test="${event.eventCategory == 'L'}"><a href="/event/add_agenda/${event.code}">DODAJ AGENDE</a></c:if><br>
-<c:if test="${event.eventCategory == 'F'}"><a href="/event/add_flight/${event.code}">DODAJ PRZELOTY</a></c:if>
-
-<%--<a href="/event/add_leaders/${event.code}">DODAJ OPIEKUNA GRUPY DO EVENTU O KODZIE ${event.code}</a>--%>
+    <fieldset>
+        <legend>Panel administracyjny - event - dane podstawowe</legend>
+        <h2>DODANY EVENT</h2><br>
+        <table>
+            <tr>
+                <td>${event.code}</td>
+                <td>${event.eventName}</td>
+            </tr>
+        </table>
+        <section class="jubotron" style="background-color: lightgray;">
+            <c:if test="${event.eventCategory == 'L'}">
+                <a href="/event/add_agenda/${event.code}" class="agenda-success-btn">DODAJ AGENDĘ EVENTU</a>
+            </c:if>
+            <c:if test="${event.eventCategory == 'F'}">
+                <a href="/event/add_flight/${event.code}" class="agenda-success-btn">DODAJ PRZELOT</a>
+            </c:if>
+        </section>
+    </fieldset>
+</div>
+<%--<section class="jubotron" style="background-color: lightgray;">--%>
+<%--<a href="/event/add_agenda/${eventCode}" class="agenda-success-btn">DODAJ KOLEJNĄ POZYCJĘ AGENDY</a>--%>
+<%--<a href="/event/add_guests/${eventCode}" class="agenda-success-btn">DODAJ LISTĘ GOŚCI</a>--%>
+<%--</section>--%>
 
 </body>
 </html>

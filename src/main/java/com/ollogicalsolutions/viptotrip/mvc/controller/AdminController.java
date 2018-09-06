@@ -35,6 +35,10 @@ public class AdminController {
 
         User user = new User();
         model.addAttribute("user", user);
+        List<User> editors = userRepository.findAllByEditorVip(true);
+        List<User> admins = userRepository.findAllByAdminVip(true);
+        model.addAttribute("admins", admins);
+        model.addAttribute("editors", editors);
         return "admin";
     }
 

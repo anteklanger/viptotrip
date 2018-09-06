@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: olgierd
@@ -49,6 +50,32 @@
 
         </table>
     </fieldset>
+
+    <div align="center">
+        <h2>Administratorzy:</h2><br/>
+
+        <table>
+            <c:forEach items="${admins}" var="admin">
+                <tr>
+                    <td>${admin.id}</td>
+                    <td>${admin.username}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <br>
+
+        <h2>Edytorzy:</h2><br/>
+
+        <table>
+            <c:forEach items="${editors}" var="editor">
+                <tr>
+                    <td>${editor.id}</td>
+                    <td>${editor.username}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <br>
+    </div>
 </div>
 
 </body>

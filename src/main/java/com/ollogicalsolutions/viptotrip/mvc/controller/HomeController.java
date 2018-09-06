@@ -37,6 +37,7 @@ public class HomeController {
 
         List<Event> events = eventRepository.findAll();
         model.addAttribute("events", events);
+        model.addAttribute("user", user);
 //        User user = new User();
 //        user.setUsername("Edytor Pierwszy");
 //        user.setPin("1234");

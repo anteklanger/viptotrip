@@ -18,6 +18,7 @@
                 <td>${message.created}</td>
                 <td>${message.body}</td>
                 <td>${message.user.username}</td>
+                <td><a href="/message/delete_message/${message.event.code}/${message.id}" class="menu-btn">USUN WIADOMOSC</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -56,4 +56,17 @@ public class MessageController {
         model.addAttribute("eventCode", eventCode);
         return ("addnewstoeventsuccess");
     }
+
+    @GetMapping("delete_message/{eventCode}/{id}")
+    public String agendaDeleteEntry(@PathVariable String id, @PathVariable String eventCode, Model model) {
+        messageRepository.delete( messageRepository.getOne(Long.parseLong(id)));
+        List<Message> messages = messageRepository.findAllByEvent_CodeOrderByCreated(eventCode);
+        model.addAttribute("messages", messages);
+        model.addAttribute("eventCode", eventCode);
+
+//        String redirect = "redirect:/message/add_message/" + eventCode;
+        return "addnewstoeventsuccess";
+    }
+
+
 }

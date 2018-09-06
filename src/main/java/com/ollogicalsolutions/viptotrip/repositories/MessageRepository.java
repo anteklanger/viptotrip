@@ -12,4 +12,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     List<Message> findAllByEventAndAuthorCategoryOrderByCreated(String eventCode, String authorCategory);
 
+    List<Message> findAllByEvent_Code(String eventCode);
+
 }

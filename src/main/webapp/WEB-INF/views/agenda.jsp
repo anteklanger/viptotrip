@@ -43,15 +43,19 @@
             </form:form>
         </table>
     </fieldset>
+
+    <table style="background-color: bisque">
+        <c:forEach items="${allAgendaEntries}" var="entry">
+            <tr>
+                <td>${entry.entryPosition}</td>
+                <td>${entry.startHour}</td>
+                <td>${entry.endHour}</td>
+                <td>${entry.entryDescription}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
-
-<ol>
-    <c:forEach items="${allAgendaEntries}" var="agenda">
-        <li>${agenda.entryPosition} ${agenda.startHour} ${agenda.endHour} ${agenda.entryDescription}</li>
-    </c:forEach>
-    <br>
-</ol>
 
 
 </body>

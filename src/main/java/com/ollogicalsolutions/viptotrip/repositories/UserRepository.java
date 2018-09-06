@@ -10,5 +10,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findFirstByUsernameAllIgnoreCase(String username);
     List<User> findAllByEvent_Code(String eventCode);
+    List<User> findAllByEditorVip(Boolean editor);
+    List<User> findAllByAdminVip(Boolean admin);
+    User findByUsername(String username);
 
 }

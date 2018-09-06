@@ -1,8 +1,10 @@
 package com.ollogicalsolutions.viptotrip.entities;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,19 +18,31 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private String pin;
 
-    @Column(nullable = false)
+    @Column
+    private String password;
+
+    @Column
     private Boolean guestVip;
 
-    @Column(nullable = false)
+    @Column
     private Boolean editorVip;
 
-    @Column(nullable = false)
+    @Column
     private Boolean adminVip;
 
-//    @OneToMany
+    @Column
+//    private Boolean enabled;
+
+    private Boolean enabled;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    //    @OneToMany
 //    @JoinColumn
 //    private List<UsersMessage> usersMessages;
 //

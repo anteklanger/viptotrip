@@ -15,7 +15,7 @@ public class Message {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String body;
-    private LocalDateTime created;
+    private String created;
     private String category;
     private String authorCategory;
 

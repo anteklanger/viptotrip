@@ -15,11 +15,11 @@
                     <td style="font-size: small; background-color: darkgrey" align="center"></td>
                 </tr>
                 <tr>
-                    <td colspan="1" align="right">WYLOT:<form:radiobutton path="flightType" value="OUT"
+                    <td colspan="1" align="right">WYLOT: <form:radiobutton path="flightType" value="OUT"
                                                                            checked="true"/></td>
                 </tr>
                 <tr>
-                    <td colspan="1" align="right">POWRÓT:<form:radiobutton path="flightType"
+                    <td colspan="1" align="right">POWRÓT: <form:radiobutton path="flightType"
                                                                                     value="BACK"/></td>
                 </tr>
 
@@ -63,15 +63,24 @@
             </form:form>
         </table>
     </fieldset>
+    <table style="background-color: bisque">
+        <c:forEach items="${flights}" var="flight">
+            <tr>
+                <td>${flight.flightType}</td>
+                <td>${flight.flightCode}</td>
+                <td>${flight.departureAirport}</td>
+                <td>${flight.departureDate}</td>
+                <td>${flight.departureTime}</td>
+                <td>${flight.arrivalAirport}</td>
+                <td>${flight.arrivalDate}</td>
+                <td>${flight.arrivalTime}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 
-<ol>
-    <c:forEach items="${allFlights}" var="flight">
-        <li>${flight.flightCode} ${flight.clientsFromCity} ${flight.departureTime} ${flight.arrivalTime}</li>
-    </c:forEach>
-    <br>
-</ol>
+
 
 </body>
 </html>

@@ -67,7 +67,7 @@ public class EventController {
         Flight flight = new Flight();
         flight.setEvent(eventRepository.findFirstByCode(eventCode));
         model.addAttribute(flight);
-        model.addAttribute("allFlights", flightRepository.findAllByEvent_Code(eventCode));
+        model.addAttribute("flights", flightRepository.findAllByEvent_Code(eventCode));
         return "flight";
     }
 

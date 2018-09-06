@@ -17,6 +17,9 @@
             <tr>
                 <td>${event.code}</td>
                 <td>${event.eventName}</td>
+                <td>${event.eventDate}</td>
+                <td>${event.hotelName}</td>
+                <td>${event.hotelAddress}</td>
             </tr>
         </table>
         <section class="jubotron" style="background-color: lightgray;">

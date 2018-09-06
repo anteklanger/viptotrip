@@ -32,6 +32,9 @@ public class MessageController {
         Message message = new Message();
         message.setEvent(eventRepository.findFirstByCode(eventCode));
         model.addAttribute(message);
+        List<Message> messages = messageRepository.findAllByEvent_Code(eventCode);
+        model.addAttribute("messages", messages);
+
         return "addnewstoevent";
     }
 
@@ -39,7 +42,6 @@ public class MessageController {
     public String addMessageSuccess(@ModelAttribute Message message, @PathVariable String eventCode, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        message.setEvent(eventRepository.findFirstByCode(eventCode));
         message.setEvent(eventRepository.findFirstByCode(eventCode));
         message.setUser(user);
         message.setAuthorCategory("editor");

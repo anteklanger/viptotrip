@@ -28,15 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
 
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean("userDetailsService")
-    public SpringDataUserDetailsService customUserDetailsService() {
-        return new SpringDataUserDetailsService();
-    }
+//    @Bean("userDetailsService")
+//    public SpringDataUserDetailsService customUserDetailsService() {
+//        return new SpringDataUserDetailsService();
+//    }
 
     @Autowired
     DataSource dataSource;
@@ -64,15 +69,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/api/**").antMatchers("/test/**");//.antMatchers("/**");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("SELECT username, pin FROM users WHERE username = ?")
-                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT users.username, role.role FROM users join user_role on user_role.user_id=users.id join role on role.role_id=role.role_id  WHERE users.username = ?")
-                .passwordEncoder(passwordEncoder());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.jdbcAuthentication().dataSource(dataSource)
+////                .usersByUsernameQuery("SELECT username, pin FROM users WHERE username = ?")
+//                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+////                .authoritiesByUsernameQuery("select username, role from user_role where username")
+//                .authoritiesByUsernameQuery("select u.username, r.role from users u inner join user_role ur on(u.id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.username= ?")
+//                .passwordEncoder(passwordEncoder());
+//    }
 
 //    @Override
 //    public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -85,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login.jsp").permitAll()
                 .antMatchers("/register").anonymous()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
 //                .httpBasic()

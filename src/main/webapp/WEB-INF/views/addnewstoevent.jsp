@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: olgierd
@@ -29,6 +30,16 @@
                 </tr>
             </form:form>
 
+        </table>
+
+        <table>
+            <c:forEach items="${messages}" var="message">
+                <tr>
+                    <td>${message.created}</td>
+                    <td>${message.body}</td>
+                    <td>${message.user.username}</td>
+                </tr>
+            </c:forEach>
         </table>
     </fieldset>
 </div>

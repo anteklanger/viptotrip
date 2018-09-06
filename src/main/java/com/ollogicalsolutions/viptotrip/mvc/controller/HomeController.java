@@ -4,6 +4,7 @@ package com.ollogicalsolutions.viptotrip.mvc.controller;
 import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.User;
 import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
+import com.ollogicalsolutions.viptotrip.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,8 @@ public class HomeController {
 
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/index")
     public String test(Model model, HttpServletRequest request) {
@@ -30,12 +33,14 @@ public class HomeController {
         boolean admin = request.isUserInRole("ADMIN");
         boolean admin2 = request.isUserInRole("ROLE_ADMIN");
 
+        User user = userRepository.findByUsername(userName);
+
         List<Event> events = eventRepository.findAll();
         model.addAttribute("events", events);
-        User user = new User();
-        user.setUsername("Edytor Pierwszy");
-        user.setPin("1234");
-        user.setId(22L);
+//        User user = new User();
+//        user.setUsername("Edytor Pierwszy");
+//        user.setPin("1234");
+//        user.setId(22L);
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         return "index";

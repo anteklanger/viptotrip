@@ -24,10 +24,6 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private EventRepository eventRepository;
-    @Autowired
-    private MessageRepository messageRepository;
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired

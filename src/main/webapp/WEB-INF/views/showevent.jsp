@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="head.jsp" %>
 
 <div align="center">
@@ -56,6 +57,19 @@
                 ${event.hotelDescription}
             </td>
         </tr>
+
+        <table>
+            <c:forEach items="${leaders}" var="leader">
+                <tr>
+                    <td>opiekun: </td>
+                    <td>${leader.name}</td>
+                    <td>${leader.phone}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <br>
+
+        <h2>Edytorzy:</h2><br/>
 
 
     </table>

@@ -20,3 +20,5 @@
     <link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
+
+<%--<body background="beach.jpg" style="background-color: rgba(100,100,100, 0.7)">--%>

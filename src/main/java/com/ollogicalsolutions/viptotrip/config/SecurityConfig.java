@@ -90,8 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login.jsp").permitAll()
+                .antMatchers("/api/*").permitAll()
                 .antMatchers("/register").anonymous()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/event/**").hasAnyAuthority("EDITOR", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
 //                .httpBasic()

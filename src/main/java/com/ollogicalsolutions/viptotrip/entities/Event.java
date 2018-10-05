@@ -3,12 +3,14 @@ package com.ollogicalsolutions.viptotrip.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
 
 @Entity
-@Table(name = "events")
+@Table(name = "events", uniqueConstraints={@UniqueConstraint(columnNames={"event_code"})})
 @Data
 public class Event {
 
@@ -16,7 +18,9 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "event_code", unique = true)
+    @NotNull
+    @Size(min = 6, max = 6, message = "KOD MUSI BYC 6 ZNAKOWY I UNIKALNY")
     private String code;
 
     @Column

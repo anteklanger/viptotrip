@@ -8,10 +8,11 @@ import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
+import javax.validation.Validator;
 import java.util.List;
-
 
 @Controller
 @RequestMapping("/event")
@@ -33,27 +34,26 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    Validator validator;
+
     @GetMapping("/new_event")
-    public String test(Model model) {
-        model.addAttribute("event", new Event());
+    public String showForm(Model model) {
+        model.addAttribute("event", new EventDTO());
         return "event";
     }
 
-//    @PostMapping("/new_event")
-//    public String saveBaseEvent(@ModelAttribute Event event, Model model) {
-//
-//
-//
-//        eventRepository.save(event);
-//        model.addAttribute("event", event);
-//        return ("eventaddsucces");
-//    }
-
     @PostMapping("/new_event")
-    public String saveBaseEvent(@ModelAttribute EventDTO eventDTO, Model model) {
-        eventService.createEvent(eventDTO);
-        model.addAttribute("event", eventDTO);
-        return ("eventaddsucces");
+    public String saveBaseEvent(@Valid @ModelAttribute EventDTO eventDTO, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "event";
+        } else {
+
+            eventService.createEvent(eventDTO);
+            model.addAttribute("event", eventDTO);
+            return ("eventaddsucces");
+        }
     }
 
     @GetMapping("/edit_event/{eventCode}")
@@ -64,8 +64,12 @@ public class EventController {
     }
 
     @PostMapping("/edit_event/{eventCode}")
-    public String editMenu(@PathVariable String eventCode, Model model) {
-
+    public String editMenu(@PathVariable String eventCode, @ModelAttribute EventDTO eventDTO, Model model) {
+        eventDTO.setId(eventService.getEventByCode(eventCode).getId());
+        eventDTO.setCode(eventCode);
+        eventDTO.setEventCategory(eventService.getEventByCode(eventCode).getEventCategory());
+        eventService.saveEditedEvent(eventDTO);
+        model.addAttribute("event", eventDTO);
 
         return "eventeditmenu";
     }
@@ -131,7 +135,7 @@ public class EventController {
 
     @GetMapping("delete_agenda/{eventCode}/{id}")
     public String agendaDeleteEntry(@PathVariable String id, @PathVariable String eventCode, Model model) {
-        agendaEntryRepository.delete( agendaEntryRepository.getOne(Long.parseLong(id)));
+        agendaEntryRepository.delete(agendaEntryRepository.getOne(Long.parseLong(id)));
         List<AgendaEntry> agendaEntries = agendaEntryRepository.findAllByEvent_CodeOrderByEntryPosition(eventCode);
         model.addAttribute("agenda", agendaEntries);
         model.addAttribute("eventCode", eventCode);

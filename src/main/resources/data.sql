@@ -18,4 +18,3 @@ Insert into user_role
 values (2, 2);
 Insert into user_role
 values (3, 3);
-

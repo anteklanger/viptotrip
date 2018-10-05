@@ -2,7 +2,9 @@ package com.ollogicalsolutions.viptotrip.mvc.controller;
 
 import com.ollogicalsolutions.viptotrip.entities.*;
 import com.ollogicalsolutions.viptotrip.repositories.*;
+import com.ollogicalsolutions.viptotrip.services.EventService;
 import com.ollogicalsolutions.viptotrip.services.GuestsCreator;
+import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,17 +30,44 @@ public class EventController {
     @Autowired
     private GuestsCreator guestsCreator;
 
+    @Autowired
+    private EventService eventService;
+
     @GetMapping("/new_event")
     public String test(Model model) {
         model.addAttribute("event", new Event());
         return "event";
     }
 
+//    @PostMapping("/new_event")
+//    public String saveBaseEvent(@ModelAttribute Event event, Model model) {
+//
+//
+//
+//        eventRepository.save(event);
+//        model.addAttribute("event", event);
+//        return ("eventaddsucces");
+//    }
+
     @PostMapping("/new_event")
-    public String saveBaseEvent(@ModelAttribute Event event, Model model) {
-        eventRepository.save(event);
-        model.addAttribute("event", event);
+    public String saveBaseEvent(@ModelAttribute EventDTO eventDTO, Model model) {
+        eventService.createEvent(eventDTO);
+        model.addAttribute("event", eventDTO);
         return ("eventaddsucces");
+    }
+
+    @GetMapping("/edit_event/{eventCode}")
+    public String editBaseData(@PathVariable String eventCode, Model model) {
+        EventDTO eventDTO = eventService.getEventByCode(eventCode);
+        model.addAttribute("event", eventDTO);
+        return "eventedit";
+    }
+
+    @PostMapping("/edit_event/{eventCode}")
+    public String editMenu(@PathVariable String eventCode, Model model) {
+
+
+        return "eventeditmenu";
     }
 
 

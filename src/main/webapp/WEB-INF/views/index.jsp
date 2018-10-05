@@ -22,7 +22,7 @@
                     <td>${event.code}</td>
                     <td> ${event.eventName} </td>
                     <td>
-                        <a href="/event/new_event" class="menu-btn">EDYTUJ</a></td>
+                        <a href="/event/edit_event/${event.code}" class="menu-btn">EDYTUJ</a></td>
                     <td>
                         <a href="/event/new_event" class="menu-btn">USUN</a>
                     </td>

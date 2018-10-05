@@ -1,5 +1,6 @@
 package com.ollogicalsolutions.viptotrip.config;
 
+import com.ollogicalsolutions.viptotrip.services.converters.EventDtoConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,11 @@ public class WebConfig implements WebMvcConfigurer {
         resourceViewResolver.setPrefix("/WEB-INF/views/");
         resourceViewResolver.setSuffix(".jsp");
         return resourceViewResolver;
+    }
+
+    @Bean
+    public EventDtoConverter eventDtoConverter() {
+        return new EventDtoConverter();
     }
 //
 //    @Override

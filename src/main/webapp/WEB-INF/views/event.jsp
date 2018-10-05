@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="head.jsp" %>
 
@@ -7,6 +8,9 @@
         <table style="border-collapse: separate; border-spacing: 10px;">
 
             <legend>Panel administracyjny - nowy event - dane podstawowe</legend>
+
+            <div class="error">${eventexists}</div>
+
             <form:form method="post" modelAttribute="event">
 
                 <tr>
@@ -64,13 +68,18 @@
 
         </table>
     </fieldset>
+
+    <table style="border-collapse: separate; border-spacing: 10px;">
+        <c:forEach items="${errorsList}" var="item">
+            <tr>
+                <td bgcolor="red">
+                        ${item}
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 
 </body>
 </html>
-
-<%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>--%>
-<%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">--%>
-<%--</script>--%>

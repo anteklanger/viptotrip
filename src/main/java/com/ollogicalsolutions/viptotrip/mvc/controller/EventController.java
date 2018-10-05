@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import javax.validation.Validator;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -46,13 +50,29 @@ public class EventController {
     @PostMapping("/new_event")
     public String saveBaseEvent(@Valid @ModelAttribute EventDTO eventDTO, BindingResult result, Model model) {
 
+
         if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            List<String> messages = new ArrayList<>();
+            for (ObjectError e : errors
+            ) {
+                messages.add(e.getDefaultMessage());
+            }
+            model.addAttribute("event", eventDTO);
+            model.addAttribute("errorsList", messages);
+            model.addAttribute("eventexists", "");
             return "event";
         } else {
 
-            eventService.createEvent(eventDTO);
-            model.addAttribute("event", eventDTO);
-            return ("eventaddsucces");
+            if (eventService.getEventByCode(eventDTO.getCode()) != null) {
+                model.addAttribute("event", eventDTO);
+                model.addAttribute("eventexists", "EVENT O PODANYM KODZIE JUŻ ISTNIEJE");
+                return "event";
+            } else {
+                eventService.createEvent(eventDTO);
+                model.addAttribute("event", eventDTO);
+                return ("eventaddsucces");
+            }
         }
     }
 

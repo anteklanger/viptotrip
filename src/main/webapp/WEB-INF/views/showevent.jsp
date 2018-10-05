@@ -68,10 +68,7 @@
             </c:forEach>
         </table>
         <br>
-
-        <h2>Edytorzy:</h2><br/>
-
-
+        
     </table>
 
 

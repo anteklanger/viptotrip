@@ -29,7 +29,6 @@ public class EventService {
     }
 
 
-
     public EventDTO saveEditedEvent(final EventDTO eventDTO) {
         Event eventEntity = modelMapper.map(eventDTO, Event.class);
         eventRepository.save(eventEntity);
@@ -39,6 +38,9 @@ public class EventService {
 
     public EventDTO getEventByCode(final String eventCode) {
         Event eventEntity = eventRepository.findFirstByCode(eventCode);
-        return modelMapper.map(eventEntity, EventDTO.class);
+        if (eventEntity != null)
+            return modelMapper.map(eventEntity, EventDTO.class);
+        else
+            return null;
     }
 }

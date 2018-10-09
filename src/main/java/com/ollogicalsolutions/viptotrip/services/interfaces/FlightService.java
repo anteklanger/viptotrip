@@ -6,4 +6,5 @@ import java.util.List;
 public interface FlightService {
 
     List<FlightDTO> getFlightsByEventCode(final String eventCode);
+    FlightDTO createFlight(final FlightDTO flightDTO, final String eventCode);
 }

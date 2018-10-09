@@ -1,35 +1,40 @@
 package com.ollogicalsolutions.viptotrip.services.dto;
 
+import com.ollogicalsolutions.viptotrip.entities.Event;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
 public class FlightDTO {
 
     private Long id;
 
     @NotBlank
-    String clientsFromCity;
+    private String clientsFromCity;
     @NotBlank
-    String flightType;
+    private String flightType;
     @NotBlank
-    String flightCode;
+    private String flightCode;
     @NotBlank
-    String departureAirport;
+    private String departureAirport;
     @NotBlank(message = "FORMAT hh/mm")
     @DateTimeFormat(pattern = "hh/mm")
-    String departureTime;
+    private String departureTime;
     @NotBlank(message = "FORMAT dd/MM/yyyy")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    String departureDate;
+    private String departureDate;
     @NotBlank
-    String arrivalAirport;
+    private String arrivalAirport;
     @NotBlank(message = "FORMAT hh/mm")
     @DateTimeFormat(pattern = "hh/mm")
-    String arrivalTime;
+    private String arrivalTime;
     @NotBlank(message = "FORMAT dd/MM/yyyy")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    String arrivalDate;
+    private String arrivalDate;
+
+    @NotNull
+    private Event event;
 
 }

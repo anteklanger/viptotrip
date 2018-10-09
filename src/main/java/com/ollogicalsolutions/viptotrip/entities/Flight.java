@@ -13,24 +13,24 @@ public class Flight {
     private Long id;
 
     @Column
-    String clientsFromCity;
+    private String clientsFromCity;
 
     @Column
-    String flightType;
+    private String flightType;
     @Column
-    String flightCode;
+    private String flightCode;
     @Column
-    String departureAirport;
+    private String departureAirport;
     @Column
-    String departureTime;
+    private String departureTime;
     @Column
-    String departureDate;
+    private String departureDate;
     @Column
-    String arrivalAirport;
+    private String arrivalAirport;
     @Column
-    String arrivalTime;
+    private String arrivalTime;
     @Column
-    String arrivalDate;
+    private String arrivalDate;
 
     @ManyToOne
     private Event event;

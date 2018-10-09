@@ -1,5 +1,7 @@
 package com.ollogicalsolutions.viptotrip.services;
 
+import com.ollogicalsolutions.viptotrip.entities.Flight;
+import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
 import com.ollogicalsolutions.viptotrip.repositories.FlightRepository;
 import com.ollogicalsolutions.viptotrip.services.dto.FlightDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
@@ -17,6 +19,7 @@ import java.util.List;
 public class FlightServiceImpl implements FlightService {
 
     private FlightRepository flightRepository;
+    private EventRepository eventRepository;
     private ModelMapper modelMapper;
 
     @Autowired
@@ -30,5 +33,13 @@ public class FlightServiceImpl implements FlightService {
         java.lang.reflect.Type targetListType = new TypeToken<List<FlightDTO>>() {}.getType();
         List<FlightDTO> flightDTOS = modelMapper.map(flightRepository.findAllByEvent_Code(eventCode), targetListType);
         return flightDTOS;
+    }
+
+    @Override
+    public FlightDTO createFlight(FlightDTO flightDTO, String eventCode) {
+        Flight flightEntity = modelMapper.map(flightDTO, Flight.class);
+        flightRepository.save(flightEntity);
+        flightDTO.setEvent(eventRepository.findFirstByCode(eventCode));
+        return flightDTO;
     }
 }

@@ -1,4 +1,4 @@
-package com.ollogicalsolutions.viptotrip.services;
+package com.ollogicalsolutions.viptotrip.services.interfaces;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -2,6 +2,7 @@ package com.ollogicalsolutions.viptotrip.config;
 
 import com.ollogicalsolutions.viptotrip.services.converters.EventDtoConverter;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -53,6 +54,9 @@ public class WebConfig implements WebMvcConfigurer {
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
+
+    @Bean
+    public ModelMapper modelMapper() {return new ModelMapper();}
 
 //
 //    @Override

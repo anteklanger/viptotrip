@@ -4,11 +4,11 @@ import com.ollogicalsolutions.viptotrip.entities.Role;
 import com.ollogicalsolutions.viptotrip.entities.User;
 import com.ollogicalsolutions.viptotrip.repositories.RoleRepository;
 import com.ollogicalsolutions.viptotrip.repositories.UserRepository;
+import com.ollogicalsolutions.viptotrip.services.interfaces.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 

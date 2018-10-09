@@ -2,14 +2,15 @@ package com.ollogicalsolutions.viptotrip.mvc.controller;
 
 import com.ollogicalsolutions.viptotrip.entities.*;
 import com.ollogicalsolutions.viptotrip.repositories.*;
-import com.ollogicalsolutions.viptotrip.services.EventService;
+
 import com.ollogicalsolutions.viptotrip.services.GuestsCreator;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,13 @@ public class EventController {
     @Autowired
     private GuestsCreator guestsCreator;
 
+//    @Autowired
+//    private EventServiceImpl eventServiceImpl;
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     Validator validator;
@@ -118,7 +124,7 @@ public class EventController {
     @GetMapping("add_flight/{eventCode}")
     public String addFlights(@PathVariable String eventCode, Model model) {
         Flight flight = new Flight();
-        flight.setEvent(eventRepository.findFirstByCode(eventCode));
+        flight.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class)); //TODO check
         model.addAttribute(flight);
         model.addAttribute("flights", flightRepository.findAllByEvent_Code(eventCode));
         return "flight";

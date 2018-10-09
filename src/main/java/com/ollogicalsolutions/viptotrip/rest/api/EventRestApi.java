@@ -3,13 +3,12 @@ package com.ollogicalsolutions.viptotrip.rest.api;
 
 import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.Flight;
-import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
-import com.ollogicalsolutions.viptotrip.repositories.FlightRepository;
+import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
+import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,19 +16,22 @@ import java.util.List;
 public class EventRestApi {
 
     @Autowired
-    private EventRepository eventRepository;
+    private EventService eventService;
     @Autowired
-    private FlightRepository flightRepository;
+    private FlightService flightService;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/api/event/{eventCode}")
+    @GetMapping(path = "/api/event/{eventCode}")
     public Event getEventById(@PathVariable String eventCode) {
-        Event event = eventRepository.findFirstByCode(eventCode);
+        Event event = modelMapper.map(eventService.getEventByCode(eventCode), Event.class);
         return event;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/api/event/flight/{eventCode}")
+    @GetMapping(path = "/api/event/flights/{eventCode}")
     public List<Flight> getFlightsByEventId(@PathVariable String eventCode) {
-        List<Flight> flights = flightRepository.findAllByEvent_Code(eventCode);
+        java.lang.reflect.Type targetListType = new TypeToken<List<Flight>>() {}.getType();
+        List<Flight> flights = modelMapper.map(flightService.getFlightsByEventCode(eventCode), targetListType);
         return flights;
     }
 

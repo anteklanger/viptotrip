@@ -3,6 +3,7 @@ package com.ollogicalsolutions.viptotrip.services;
 import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,15 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class EventService {
+public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
-    private ModelMapper modelMapper = new ModelMapper();
-
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public EventService(final EventRepository eventRepository) {
+    public EventServiceImpl(final EventRepository eventRepository, ModelMapper modelMapper) {
         this.eventRepository = eventRepository;
+        this.modelMapper = modelMapper;
     }
 
     public EventDTO createEvent(final EventDTO eventDTO) {

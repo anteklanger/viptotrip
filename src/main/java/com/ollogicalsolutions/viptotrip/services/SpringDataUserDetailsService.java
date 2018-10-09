@@ -29,14 +29,10 @@ package com.ollogicalsolutions.viptotrip.services;//package com.ollogicalsolutio
 //}
 
 
-import com.ollogicalsolutions.viptotrip.entities.CurrentUser;
-import com.ollogicalsolutions.viptotrip.entities.Role;
 import com.ollogicalsolutions.viptotrip.entities.User;
 import com.ollogicalsolutions.viptotrip.repositories.RoleRepository;
 import com.ollogicalsolutions.viptotrip.repositories.UserRepository;
-import com.ollogicalsolutions.viptotrip.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -30,5 +30,4 @@ public class EventDTO {
     private Long hotelLatitude;
     @NotNull(message = "POLE DŁUGOŚC GEOGRAFICZNA NIE MOŻE BYC PUSTE")
     private Long hotelLongitude;
-
 }

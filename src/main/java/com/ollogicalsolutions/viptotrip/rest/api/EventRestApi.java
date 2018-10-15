@@ -4,6 +4,7 @@ package com.ollogicalsolutions.viptotrip.rest.api;
 import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.Flight;
 import com.ollogicalsolutions.viptotrip.rest.api.rest_entities.EventRestEntity;
+import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
 import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
 import org.modelmapper.ModelMapper;
@@ -25,6 +26,8 @@ public class EventRestApi {
 
     @GetMapping(path = "/api/event/{eventCode}")
     public EventRestEntity getEventById(@PathVariable String eventCode) {
+        EventDTO eventDTO = eventService.getEventByCode(eventCode);
+        if (eventDTO == null) throw new EventNotFoundException("Event with code " + eventCode + " not found");
         EventRestEntity event = modelMapper.map(eventService.getEventByCode(eventCode), EventRestEntity.class);
         return event;
     }

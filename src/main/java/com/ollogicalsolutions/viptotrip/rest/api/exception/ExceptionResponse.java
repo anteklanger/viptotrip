@@ -1,4 +1,4 @@
-package com.ollogicalsolutions.viptotrip.rest.api;
+package com.ollogicalsolutions.viptotrip.rest.api.exception;
 
 
 import lombok.Data;

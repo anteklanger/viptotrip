@@ -19,19 +19,19 @@ public class FlightDTO {
     private String flightCode;
     @NotBlank
     private String departureAirport;
-    @NotBlank(message = "FORMAT hh/mm")
-    @DateTimeFormat(pattern = "hh/mm")
+//    @NotBlank(message = "FORMAT hh/mm")
+//    @DateTimeFormat(pattern = "hh/mm")
     private String departureTime;
-    @NotBlank(message = "FORMAT dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    @NotBlank(message = "FORMAT dd/MM/yyyy")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String departureDate;
     @NotBlank
     private String arrivalAirport;
-    @NotBlank(message = "FORMAT hh/mm")
-    @DateTimeFormat(pattern = "hh/mm")
+//    @NotBlank(message = "FORMAT hh/mm")
+//    @DateTimeFormat(pattern = "hh/mm")
     private String arrivalTime;
-    @NotBlank(message = "FORMAT dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    @NotBlank(message = "FORMAT dd/MM/yyyy")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String arrivalDate;
     @NotNull
     private Event event;

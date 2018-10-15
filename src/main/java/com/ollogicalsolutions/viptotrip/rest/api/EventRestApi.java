@@ -1,8 +1,9 @@
 package com.ollogicalsolutions.viptotrip.rest.api;
 
 
-import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.Flight;
+import com.ollogicalsolutions.viptotrip.rest.api.exception.EventNotFoundException;
+import com.ollogicalsolutions.viptotrip.rest.api.exception.FlightsNotFoundException;
 import com.ollogicalsolutions.viptotrip.rest.api.rest_entities.EventRestEntity;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class EventRestApi {
 
     @Autowired
@@ -24,7 +26,7 @@ public class EventRestApi {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping(path = "/api/event/{eventCode}")
+    @GetMapping(path = "/event/{eventCode}")
     public EventRestEntity getEventById(@PathVariable String eventCode) {
         EventDTO eventDTO = eventService.getEventByCode(eventCode);
         if (eventDTO == null) throw new EventNotFoundException("Event with code " + eventCode + " not found");
@@ -32,10 +34,11 @@ public class EventRestApi {
         return event;
     }
 
-    @GetMapping(path = "/api/event/flights/{eventCode}")
+    @GetMapping(path = "/event/flights/{eventCode}")
     public List<Flight> getFlightsByEventId(@PathVariable String eventCode) {
         java.lang.reflect.Type targetListType = new TypeToken<List<Flight>>() {}.getType();
         List<Flight> flights = modelMapper.map(flightService.getFlightsByEventCode(eventCode), targetListType);
+        if (flights.size() == 0) throw new FlightsNotFoundException("Flights for event " + eventCode + " not found");
         return flights;
     }
 

@@ -1,5 +1,7 @@
-package com.ollogicalsolutions.viptotrip.rest.api;
+package com.ollogicalsolutions.viptotrip.rest.api.exception;
 
+import com.ollogicalsolutions.viptotrip.rest.api.exception.EventNotFoundException;
+import com.ollogicalsolutions.viptotrip.rest.api.exception.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,12 +20,16 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) throws Exception {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-
-
     }
 
     @ExceptionHandler(EventNotFoundException.class)
     public final ResponseEntity<Object> handleEventNotFoundException(EventNotFoundException ex, WebRequest request) throws Exception {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FlightsNotFoundException.class)
+    public final ResponseEntity<Object> handleFlightNotFoundException(FlightsNotFoundException ex, WebRequest request) throws Exception {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
 

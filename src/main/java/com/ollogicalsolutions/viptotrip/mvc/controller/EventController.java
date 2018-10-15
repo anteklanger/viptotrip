@@ -5,7 +5,9 @@ import com.ollogicalsolutions.viptotrip.repositories.*;
 
 import com.ollogicalsolutions.viptotrip.services.GuestsCreator;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import com.ollogicalsolutions.viptotrip.services.dto.FlightDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
+import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +29,8 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private EventLeaderRepository eventLeaderRepository;
-    @Autowired
-    private FlightRepository flightRepository;
+//    @Autowired
+//    private FlightRepository flightRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -40,6 +42,9 @@ public class EventController {
 //    private EventServiceImpl eventServiceImpl;
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private FlightService flightService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -123,18 +128,17 @@ public class EventController {
 
     @GetMapping("add_flight/{eventCode}")
     public String addFlights(@PathVariable String eventCode, Model model) {
-        Flight flight = new Flight();
+        FlightDTO flight = new FlightDTO();
         flight.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class)); //TODO check
-        model.addAttribute(flight);
-        model.addAttribute("flights", flightRepository.findAllByEvent_Code(eventCode));
+        model.addAttribute("flight", flight);
+        model.addAttribute("flights", flightService.getFlightsByEventCode(eventCode));
         return "flight";
     }
 
     @PostMapping("add_flight/{eventCode}")
-    public String flightAddedSuccess(@ModelAttribute Flight flight, @PathVariable String eventCode, Model model) {
-        flight.setEvent(eventRepository.findFirstByCode(eventCode));
-        flightRepository.save(flight);
-        List<Flight> flights = flightRepository.findAllByEvent_Code(eventCode);
+    public String flightAddedSuccess(@ModelAttribute FlightDTO flight, @PathVariable String eventCode, Model model) {
+        flightService.createFlight(flight, eventCode);
+        List<FlightDTO> flights = flightService.getFlightsByEventCode(eventCode);
         model.addAttribute("flights", flights);
         model.addAttribute("eventCode", eventCode);
         return ("flightsucces");

@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Long> {
-
     List<Flight> findAllByEvent_Code(String eventCode);
-
 }

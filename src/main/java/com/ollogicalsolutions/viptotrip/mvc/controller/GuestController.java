@@ -3,7 +3,6 @@ package com.ollogicalsolutions.viptotrip.mvc.controller;
 import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.EventLeader;
 import com.ollogicalsolutions.viptotrip.entities.Flight;
-import com.ollogicalsolutions.viptotrip.entities.User;
 import com.ollogicalsolutions.viptotrip.repositories.EventLeaderRepository;
 import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
 import com.ollogicalsolutions.viptotrip.repositories.FlightRepository;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

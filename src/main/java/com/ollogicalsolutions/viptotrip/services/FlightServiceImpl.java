@@ -1,5 +1,6 @@
 package com.ollogicalsolutions.viptotrip.services;
 
+import com.ollogicalsolutions.viptotrip.entities.Event;
 import com.ollogicalsolutions.viptotrip.entities.Flight;
 import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
 import com.ollogicalsolutions.viptotrip.repositories.FlightRepository;
@@ -23,8 +24,9 @@ public class FlightServiceImpl implements FlightService {
     private ModelMapper modelMapper;
 
     @Autowired
-    public FlightServiceImpl(FlightRepository flightRepository, ModelMapper modelMapper) {
+    public FlightServiceImpl(FlightRepository flightRepository, EventRepository eventRepository, ModelMapper modelMapper) {
         this.flightRepository = flightRepository;
+        this.eventRepository = eventRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -37,9 +39,10 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightDTO createFlight(FlightDTO flightDTO, String eventCode) {
+        Event event = eventRepository.findFirstByCode(eventCode);
+        flightDTO.setEvent(event);
         Flight flightEntity = modelMapper.map(flightDTO, Flight.class);
         flightRepository.save(flightEntity);
-        flightDTO.setEvent(eventRepository.findFirstByCode(eventCode));
         return flightDTO;
     }
 }

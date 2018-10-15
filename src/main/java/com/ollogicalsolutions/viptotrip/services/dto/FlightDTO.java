@@ -33,7 +33,6 @@ public class FlightDTO {
     @NotBlank(message = "FORMAT dd/MM/yyyy")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String arrivalDate;
-
     @NotNull
     private Event event;
 

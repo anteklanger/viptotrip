@@ -1,10 +1,11 @@
 package com.ollogicalsolutions.viptotrip.rest.api;
 
 
-import com.ollogicalsolutions.viptotrip.entities.Flight;
+
 import com.ollogicalsolutions.viptotrip.rest.api.exception.EventNotFoundException;
 import com.ollogicalsolutions.viptotrip.rest.api.exception.FlightsNotFoundException;
 import com.ollogicalsolutions.viptotrip.rest.api.rest_entities.EventRestEntity;
+import com.ollogicalsolutions.viptotrip.rest.api.rest_entities.FlightRestEntity;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
 import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
@@ -35,9 +36,9 @@ public class EventRestApi {
     }
 
     @GetMapping(path = "/event/flights/{eventCode}")
-    public List<Flight> getFlightsByEventId(@PathVariable String eventCode) {
-        java.lang.reflect.Type targetListType = new TypeToken<List<Flight>>() {}.getType();
-        List<Flight> flights = modelMapper.map(flightService.getFlightsByEventCode(eventCode), targetListType);
+    public List<FlightRestEntity> getFlightsByEventId(@PathVariable String eventCode) {
+        java.lang.reflect.Type targetListType = new TypeToken<List<FlightRestEntity>>() {}.getType();
+        List<FlightRestEntity> flights = modelMapper.map(flightService.getFlightsByEventCode(eventCode), targetListType);
         if (flights.size() == 0) throw new FlightsNotFoundException("Flights for event " + eventCode + " not found");
         return flights;
     }

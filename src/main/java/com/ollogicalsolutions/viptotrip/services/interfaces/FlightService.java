@@ -6,6 +6,7 @@ import java.util.List;
 public interface FlightService {
 
     List<FlightDTO> getFlightsByEventCode(final String eventCode);
-    FlightDTO createFlight(final FlightDTO flightDTO, final String eventCode);
-    void deleteFlightsByEventCode(final String eventCode);
+    FlightDTO addFlightToEvent(final FlightDTO flightDTO, final String eventCode);
+    Integer deleteFlightById(final Long id);
+    Integer deleteAllFlightsByEventCode(final String eventCode);
 }

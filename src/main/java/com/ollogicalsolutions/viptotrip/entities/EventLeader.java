@@ -12,15 +12,15 @@ public class EventLeader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    String name;
+    private String name;
     @Column
-    String email;
+    private String email;
     @Column
-    String phone;
+    private String phone;
     @Column
-    String city;
+    private String city;
     @Column
-    String role;
+    private String role;
 
     @ManyToOne
     private Event event;

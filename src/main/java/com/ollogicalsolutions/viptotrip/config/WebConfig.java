@@ -1,8 +1,8 @@
 package com.ollogicalsolutions.viptotrip.config;
 
-import com.ollogicalsolutions.viptotrip.services.converters.EventDtoConverter;
-import com.ollogicalsolutions.viptotrip.services.converters.FlightDtoConverter;
+import com.ollogicalsolutions.viptotrip.services.converters.*;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import com.ollogicalsolutions.viptotrip.services.dto.MessageDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -48,6 +48,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public FlightDtoConverter flightDtoConverter() {return new FlightDtoConverter();}
+
+    @Bean
+    public AgendaEntryDtoConverter agendaEntryDtoConverter() {return new AgendaEntryDtoConverter();}
+
+    @Bean
+    public EventLeaderDtoConverter eventLeaderDtoConverter() {return new EventLeaderDtoConverter();}
+
+    @Bean
+    public MessageDtoConverter messageDtoConverter() {return new MessageDtoConverter();}
 
     @Bean
     public Validator validator() {

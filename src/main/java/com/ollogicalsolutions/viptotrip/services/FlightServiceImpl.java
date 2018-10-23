@@ -11,7 +11,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 
@@ -38,7 +37,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDTO createFlight(FlightDTO flightDTO, String eventCode) {
+    public FlightDTO addFlightToEvent(FlightDTO flightDTO, String eventCode) {
         Event event = eventRepository.findFirstByCode(eventCode);
         flightDTO.setEvent(event);
         Flight flightEntity = modelMapper.map(flightDTO, Flight.class);
@@ -47,7 +46,14 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void deleteFlightsByEventCode(String eventCode) {
-        flightRepository.deleteAllByEvent_Code(eventCode);
+    public Integer deleteFlightById(Long id) {
+        flightRepository.deleteById(id);
+        return null;
+    }
+
+    @Override
+    public Integer deleteAllFlightsByEventCode(String eventCode) {
+        Integer flightsDeleted = flightRepository.deleteAllByEvent_Code(eventCode);
+        return flightsDeleted;
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface EventLeaderRepository extends JpaRepository<EventLeader, Long> {
 
     List<EventLeader> findAllByEvent_Code(String eventCode);
+    Integer deleteAllByEvent_Code(String eventCode);
 }

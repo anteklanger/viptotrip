@@ -12,17 +12,16 @@ public class AgendaEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column
-    Integer entryPosition;
+    private Integer entryPosition;
     @Column
-    String startHour;
+    private String startHour;
     @Column
-    String endHour;
+    private String endHour;
     @Column
-    String entryDescription;
+    private String entryDescription;
     @Column
-    String entryCategory;
+    private String entryCategory;
 
     @ManyToOne
     private Event event;

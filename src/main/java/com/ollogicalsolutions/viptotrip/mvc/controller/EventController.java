@@ -152,7 +152,7 @@ public class EventController {
 
     @PostMapping("add_flight/{eventCode}")
     public String flightAddedSuccess(@ModelAttribute FlightDTO flight, @PathVariable String eventCode, Model model) {
-        flightService.createFlight(flight, eventCode);
+        flightService.addFlightToEvent(flight, eventCode);
         List<FlightDTO> flights = flightService.getFlightsByEventCode(eventCode);
         model.addAttribute("flights", flights);
         model.addAttribute("eventCode", eventCode);

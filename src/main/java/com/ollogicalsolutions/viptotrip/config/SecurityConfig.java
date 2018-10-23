@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login.jsp").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/api/*").permitAll()
                 .antMatchers("/register").anonymous()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
@@ -84,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
 //                .httpBasic()
-                .formLogin()//.loginPage("/login.jsp")
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                 .csrf().disable()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/login.jsp");

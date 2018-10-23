@@ -45,4 +45,9 @@ public class FlightServiceImpl implements FlightService {
         flightRepository.save(flightEntity);
         return flightDTO;
     }
+
+    @Override
+    public void deleteFlightsByEventCode(String eventCode) {
+        flightRepository.deleteAllByEvent_Code(eventCode);
+    }
 }

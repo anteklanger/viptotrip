@@ -61,7 +61,6 @@ public class EventController {
     @PostMapping("/new_event")
     public String saveBaseEvent(@Valid @ModelAttribute EventDTO eventDTO, BindingResult result, Model model) {
 
-
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
             List<String> messages = new ArrayList<>();
@@ -103,6 +102,22 @@ public class EventController {
         model.addAttribute("event", eventDTO);
 
         return "eventeditmenu";
+    }
+
+    @GetMapping("/delete_event/{eventCode}")
+    public String deleteEvent(@PathVariable String eventCode, Model model) {
+        model.addAttribute("eventCode", eventCode);
+        return "deleteevent";
+    }
+
+    @GetMapping("delete_event_success/{eventCode}")
+    public String confirmDeletion(@PathVariable String eventCode, Model model) {
+        Integer delCode = eventService.deleteEventByCode(eventCode);
+
+        System.out.println(delCode);
+
+        model.addAttribute("eventCode", eventCode);
+        return "deleteeventsuccess";
     }
 
 

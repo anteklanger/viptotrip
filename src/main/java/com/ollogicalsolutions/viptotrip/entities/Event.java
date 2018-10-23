@@ -47,13 +47,4 @@ public class Event {
     @Column
     private Long hotelLongitude;
 
-
-//    @OneToMany
-//    @JoinColumn
-//    private List<Message> messages;
-
-//    @OneToMany
-//    @JoinColumn
-//    private List<User> users;
-
 }

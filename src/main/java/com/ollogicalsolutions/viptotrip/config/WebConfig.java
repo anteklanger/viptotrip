@@ -22,15 +22,10 @@ import javax.validation.Validator;
 
 @Configuration
 @ComponentScan(basePackages = "com.ollogicalsolutions")
-
 @EnableJpaRepositories(basePackages = "com.ollogicalsolutions")
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {
 
-//    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//        configurer.enable();
-//    }
 
     @Bean
     public ViewResolver viewResolver() {
@@ -62,23 +57,4 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ModelMapper modelMapper() {return new ModelMapper();}
 
-//
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedMethods("GET", "POST", "PUT", "DELETE")
-//                .allowedOrigins("http://localhost");
-//    }
-//
-//    @Bean
-//    public LocalEntityManagerFactoryBean entityManagerFactory() {
-//        LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean();
-//        factoryBean.setPersistenceUnitName("viptotrip");
-//        return factoryBean;
-//    }
-//
-//    @Bean
-//    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-//        return new JpaTransactionManager(emf);
-//    }
 }

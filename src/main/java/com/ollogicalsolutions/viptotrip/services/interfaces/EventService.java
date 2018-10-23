@@ -6,5 +6,6 @@ public interface EventService {
     EventDTO createEvent(final EventDTO eventDTO);
     EventDTO saveEditedEvent(final EventDTO eventDTO);
     EventDTO getEventByCode(final String eventCode);
+    Integer deleteEventByCode(final String eventCode);
 
 }

@@ -65,6 +65,11 @@
                         <input type="submit" value="Zatwierdź"/></td>
                 </tr>
 
+                <tr>
+                    <td colspan="1" align="right" style="background-color: darkgrey">
+                        <a href="/index" class="menu-btn">ANULUJ I WRÓC DO MENU</a>
+                </tr>
+
             </form:form>
 
         </table>

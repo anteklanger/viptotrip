@@ -83,6 +83,10 @@
                             <a href="/message/add_message/${event.code}" class="menu-btn">WIADOMOŚC</a>
                         </td>
                     </tr>
+                <tr>
+                    <td colspan="1" align="right" style="background-color: darkgrey">
+                        <a href="/index" class="menu-btn">ANULUJ I WRÓC DO MENU</a>
+                </tr>
             </table>
         </div>
 

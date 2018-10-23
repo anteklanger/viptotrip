@@ -24,7 +24,7 @@
                     <td>
                         <a href="/event/edit_event/${event.code}" class="menu-btn">EDYTUJ</a></td>
                     <td>
-                        <a href="/event/new_event" class="menu-btn">USUN</a>
+                        <a href="/event/delete_event/${event.code}" class="menu-btn">USUN</a>
                     </td>
                     <td>
                         <a href="/message/add_message/${event.code}" class="menu-btn">WIADOMOŚC</a>

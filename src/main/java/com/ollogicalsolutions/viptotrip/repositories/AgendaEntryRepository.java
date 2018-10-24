@@ -8,5 +8,8 @@ import java.util.List;
 @Repository
 public interface AgendaEntryRepository extends JpaRepository<AgendaEntry, Long> {
     List<AgendaEntry> findAllByEvent_CodeOrderByEntryPosition(String eventCode);
-    void deleteAllByEvent_Code(String eventCode);
+    Integer deleteAllByEvent_Code(String eventCode);
+    AgendaEntry findFirstByEvent_Code(String eventCode);
+    void deleteById(Long id);
+
 }

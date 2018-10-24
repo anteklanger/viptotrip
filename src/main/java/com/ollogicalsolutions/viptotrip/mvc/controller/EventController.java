@@ -4,8 +4,12 @@ import com.ollogicalsolutions.viptotrip.entities.*;
 import com.ollogicalsolutions.viptotrip.repositories.*;
 
 import com.ollogicalsolutions.viptotrip.services.GuestsCreator;
+import com.ollogicalsolutions.viptotrip.services.dto.AgendaEntryDTO;
 import com.ollogicalsolutions.viptotrip.services.dto.EventDTO;
+import com.ollogicalsolutions.viptotrip.services.dto.EventLeaderDTO;
 import com.ollogicalsolutions.viptotrip.services.dto.FlightDTO;
+import com.ollogicalsolutions.viptotrip.services.interfaces.AgendaEntryService;
+import com.ollogicalsolutions.viptotrip.services.interfaces.EventLeaderService;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventService;
 import com.ollogicalsolutions.viptotrip.services.interfaces.FlightService;
 import org.modelmapper.ModelMapper;
@@ -25,16 +29,16 @@ import java.util.List;
 @RequestMapping("/event")
 public class EventController {
 
-    @Autowired
-    private EventRepository eventRepository;
-    @Autowired
-    private EventLeaderRepository eventLeaderRepository;
+//    @Autowired
+//    private EventRepository eventRepository;
+//    @Autowired
+//    private EventLeaderRepository eventLeaderRepository;
 //    @Autowired
 //    private FlightRepository flightRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private AgendaEntryRepository agendaEntryRepository;
+//    @Autowired
+//    private AgendaEntryRepository agendaEntryRepository;
     @Autowired
     private GuestsCreator guestsCreator;
 
@@ -45,6 +49,12 @@ public class EventController {
 
     @Autowired
     private FlightService flightService;
+
+    @Autowired
+    private EventLeaderService eventLeaderService;
+
+    @Autowired
+    AgendaEntryService agendaEntryService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -123,19 +133,19 @@ public class EventController {
 
     @GetMapping("add_leaders/{eventCode}")
     public String addLeaders(@PathVariable String eventCode, Model model) {
-        EventLeader eventLeader = new EventLeader();
-        eventLeader.setEvent(eventRepository.findFirstByCode(eventCode));
-        model.addAttribute(eventLeader);
-        model.addAttribute("allLeaders", eventLeaderRepository.findAllByEvent_Code(eventCode));
+        EventLeaderDTO eventLeaderDTO = new EventLeaderDTO();
+        eventLeaderDTO.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class));
+        model.addAttribute("eventLeader", eventLeaderDTO);
+        model.addAttribute("allLeaders", eventLeaderService.getEventLeadersByEventCode(eventCode));
         return "eventleader";
     }
 
     @PostMapping("add_leaders/{eventCode}")
-    public String leaderAddedSuccess(@ModelAttribute EventLeader eventLeader, @PathVariable String eventCode, Model model) {
-        eventLeader.setEvent(eventRepository.findFirstByCode(eventCode));
-        eventLeaderRepository.save(eventLeader);
-        List<EventLeader> leaders = eventLeaderRepository.findAllByEvent_Code(eventCode);
-        model.addAttribute("leaders", leaders);
+    public String leaderAddedSuccess(@ModelAttribute EventLeaderDTO eventLeaderDTO, @PathVariable String eventCode, Model model) {
+        eventLeaderDTO.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class));
+        eventLeaderService.addEventLeaderToEvent(eventLeaderDTO, eventCode);
+        List<EventLeaderDTO> leaderDTOS = eventLeaderService.getEventLeadersByEventCode(eventCode);
+        model.addAttribute("leaders", leaderDTOS);
         model.addAttribute("eventCode", eventCode);
         return ("leaderaddsucces");
     }
@@ -160,28 +170,28 @@ public class EventController {
     }
 
     @GetMapping("add_agenda/{eventCode}")
-    public String addAgenda(@PathVariable String eventCode, Model model) {
-        AgendaEntry agendaEntry = new AgendaEntry();
-        agendaEntry.setEvent(eventRepository.findFirstByCode(eventCode));
-        model.addAttribute("agenda", agendaEntry);
-        model.addAttribute("allAgendaEntries", agendaEntryRepository.findAllByEvent_CodeOrderByEntryPosition(eventCode));
+    public String addAgendaEntry(@PathVariable String eventCode, Model model) {
+        AgendaEntryDTO agendaEntryDTO = new AgendaEntryDTO();
+        agendaEntryDTO.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class));
+        model.addAttribute("agenda", agendaEntryDTO);
+        model.addAttribute("allAgendaEntries", agendaEntryService.getAllAgendaEntriesByEventCodeOrderByPosition(eventCode));
         return "agenda";
     }
 
     @PostMapping("add_agenda/{eventCode}")
-    public String agendaAddedSuccess(@ModelAttribute AgendaEntry agenda, @PathVariable String eventCode, Model model) {
-        agenda.setEvent(eventRepository.findFirstByCode(eventCode));
-        agendaEntryRepository.save(agenda);
-        List<AgendaEntry> agendaEntries = agendaEntryRepository.findAllByEvent_CodeOrderByEntryPosition(eventCode);
-        model.addAttribute("agenda", agendaEntries);
+    public String agendaAddedSuccess(@ModelAttribute AgendaEntryDTO agendaEntryDTO, @PathVariable String eventCode, Model model) {
+        agendaEntryDTO.setEvent(modelMapper.map(eventService.getEventByCode(eventCode), Event.class));
+        agendaEntryService.addAgendaEntryToEvent(agendaEntryDTO, eventCode);
+        List<AgendaEntryDTO> agendaEntryDTOS = agendaEntryService.getAllAgendaEntriesByEventCodeOrderByPosition(eventCode);
+        model.addAttribute("agenda", agendaEntryDTOS);
         model.addAttribute("eventCode", eventCode);
         return ("agendasuccess");
     }
 
     @GetMapping("delete_agenda/{eventCode}/{id}")
     public String agendaDeleteEntry(@PathVariable String id, @PathVariable String eventCode, Model model) {
-        agendaEntryRepository.delete(agendaEntryRepository.getOne(Long.parseLong(id)));
-        List<AgendaEntry> agendaEntries = agendaEntryRepository.findAllByEvent_CodeOrderByEntryPosition(eventCode);
+        agendaEntryService.deleteAgendaEntryById(Long.parseLong(id));
+        List<AgendaEntryDTO> agendaEntries = agendaEntryService.getAllAgendaEntriesByEventCodeOrderByPosition(eventCode);
         model.addAttribute("agenda", agendaEntries);
         model.addAttribute("eventCode", eventCode);
         return ("agendasuccess");
@@ -200,7 +210,7 @@ public class EventController {
         guestsCreator.createListOfGuestsForEvent(eventCode, list);
         List<User> users = userRepository.findAllByEvent_Code(eventCode);
         model.addAttribute("guests", users);
-        model.addAttribute("event", eventRepository.findFirstByCode(eventCode));
+        model.addAttribute("event", eventService.getEventByCode(eventCode));
         return "guestssucces";
     }
 

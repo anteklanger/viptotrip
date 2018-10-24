@@ -5,7 +5,6 @@ import com.ollogicalsolutions.viptotrip.entities.EventLeader;
 import com.ollogicalsolutions.viptotrip.repositories.EventLeaderRepository;
 import com.ollogicalsolutions.viptotrip.repositories.EventRepository;
 import com.ollogicalsolutions.viptotrip.services.dto.EventLeaderDTO;
-import com.ollogicalsolutions.viptotrip.services.dto.FlightDTO;
 import com.ollogicalsolutions.viptotrip.services.interfaces.EventLeaderService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -33,7 +32,7 @@ public class EventLeaderServiceImpl implements EventLeaderService {
 
     @Override
     public List<EventLeaderDTO> getEventLeadersByEventCode(String eventCode) {
-        java.lang.reflect.Type targetListType = new TypeToken<List<FlightDTO>>() {}.getType();
+        java.lang.reflect.Type targetListType = new TypeToken<List<EventLeaderDTO>>() {}.getType();
         List<EventLeaderDTO> eventLeaderDTOS = modelMapper.map(eventLeaderRepository.findAllByEvent_Code(eventCode), targetListType);
         return eventLeaderDTOS;
     }
